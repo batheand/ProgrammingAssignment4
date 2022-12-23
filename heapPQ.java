@@ -10,12 +10,8 @@ public class heapPQ {
     }
     public void swimUp(int index) {
         while (index > 1 && index(index).getCustomer().getId()>index(index/2).getCustomer().getId()) {
-            node temp = index(index/2).getNext();
-            index(index/2).setNext(index(index));
-            index(index).setNext(temp);
-            index(index-1).setNext(index(index/2));
-
-
+            swap(index(index), index(index/2));
+            index = index/2;
         }
     }
     public void sinkDown() {}
