@@ -1,9 +1,9 @@
 import java.io.*;
 
 public class heapPQ {
-    int size;
+    int size, currSize = 1;
     customer [] pq;
-    public void heapPQ(String fileName) {
+    public heapPQ(String fileName) {
         // This will reference one line at a time
         String line = null;
         try {
@@ -13,16 +13,17 @@ public class heapPQ {
             // Wrap FileReader in BufferedReader
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             line = bufferedReader.readLine().trim();
-            size = Integer.parseInt(line);
+            size = Integer.parseInt(line)+1;
             // create a new array with the length we found
             pq = new customer[size];
             // Read each non-blank line of the file and store in the array
-            for (int i = 0; i<size; i++) {
+            for (int i = 1; i<size; i++) {
                 line = bufferedReader.readLine().trim();
                 String [] butcheredInfo = line.split(" ");
                 if (butcheredInfo.length==4) {
                     customer temp = new customer(Integer.parseInt(butcheredInfo[0]), 2022-Integer.parseInt(butcheredInfo[1]), Integer.parseInt(butcheredInfo[2]), Integer.parseInt(butcheredInfo[3]));
-                    pq [i] = temp;
+                    enlist(temp);
+                    print();
                 }
             }
             // Close the file
@@ -31,17 +32,26 @@ public class heapPQ {
             System.out.println("Error reading file '" + fileName + "'");
         }
     }
+    public void enlist (customer toBeEnlisted) {
+        pq [currSize] = toBeEnlisted;
+        swimUp(currSize);
+        currSize++;
+    }
     public void swimUp(int index) {
-        if(size>index) {
-            while (index > 1 && pq[index].getPriorityLevel()>pq[index/2].getPriorityLevel()) {
-                customer temp = pq[index];
-                pq[index] = pq[index/2];
-                pq[index/2] = temp;
-                index = index/2;
-            }
+        while (index > 1 && pq[index].getPriorityLevel()>pq[index/2].getPriorityLevel()) {    
+            customer temp = pq[index];
+            pq[index] = pq[index/2];
+            pq[index/2] = temp;
+            index = index/2;
         }
     }
     public void sinkDown() {}
+    public void print() {
+        System.out.println("\n\n NEWEST VERSION OF THE LIST \n\n");
+        for (int i = 1; i<currSize; i++) {
+            pq[i].print();
+        }
+    }
     
     
 }

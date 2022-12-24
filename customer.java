@@ -7,6 +7,13 @@ public class customer {
         this.orderTime=orderTime;
         this.preparationTime=preparationTime;
     }
+    public void print () {
+        System.out.println("ID: " + id);
+        System.out.println("Priority Level: " + priorityLevel);
+        System.out.println("Order Time: " + orderTime);
+        System.out.println("Preparation Time: " + preparationTime);
+
+    }
     public Integer getPriorityLevel() {
         return priorityLevel;
     }
