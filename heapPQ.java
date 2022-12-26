@@ -24,6 +24,7 @@ public class heapPQ {
             index = index/2;
             */
             exch(index, index/2);
+            index = index/2;
         }
 
 
