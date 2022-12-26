@@ -131,17 +131,17 @@ public class heapPQ {
         return times;
     }
     private customer delMaxPriority() {
-        customer result = pq[0];
+        customer result = pq[1];
  
         // Replace the value
         // at the root with
         // the last leaf
-        pq[0] = pq[size];
+        pq[1] = pq[size];
         size = size - 1;
         // Shift down the replaced
         // element to maintain the
         // heap property
-        sinkDown(0);
+        sinkDown(1);
         return result;
     }
     public couriers[] updateCouriers(couriers [] c, int time) {
