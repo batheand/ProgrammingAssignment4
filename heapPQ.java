@@ -9,9 +9,7 @@ public class heapPQ {
             pq [i] = new customer(); 
         }
     }
-    public heapPQ(int length) {
-        
-    }
+    
     public void enlist (customer toBeEnlisted) {
         pq [currSize] = toBeEnlisted;
         swimUp(currSize);
