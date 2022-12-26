@@ -3,33 +3,10 @@ import java.io.*;
 public class heapPQ {
     int size, currSize = 1;
     customer [] pq;
-    public heapPQ(String fileName) {
-        // This will reference one line at a time
-        String line = null;
-        try {
-            // FileReader reads text files in the default encoding
-            FileReader fileReader = new FileReader(fileName);
-
-            // Wrap FileReader in BufferedReader
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            line = bufferedReader.readLine().trim();
-            size = Integer.parseInt(line)+1;
-            // create a new array with the length we found
-            pq = new customer[size];
-            // Read each non-blank line of the file and store in the array
-            for (int i = 1; i<size; i++) {
-                line = bufferedReader.readLine().trim();
-                String [] butcheredInfo = line.split(" ");
-                if (butcheredInfo.length==4) {
-                    customer temp = new customer(Integer.parseInt(butcheredInfo[0]), 2022-Integer.parseInt(butcheredInfo[1]), Integer.parseInt(butcheredInfo[2]), Integer.parseInt(butcheredInfo[3]));
-                    enlist(temp);
-                    print();
-                }
-            }
-            // Close the file
-            bufferedReader.close();
-        } catch (IOException ex) {
-            System.out.println("Error reading file '" + fileName + "'");
+    public heapPQ (int s) {
+        pq = new customer [s];
+        for (int i = 1; i<s; i++) {
+            pq [i] = new customer(); 
         }
     }
     public heapPQ(int length) {
