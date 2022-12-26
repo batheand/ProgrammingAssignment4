@@ -32,6 +32,9 @@ public class heapPQ {
             System.out.println("Error reading file '" + fileName + "'");
         }
     }
+    public heapPQ(int length) {
+        
+    }
     public void enlist (customer toBeEnlisted) {
         pq [currSize] = toBeEnlisted;
         swimUp(currSize);
@@ -150,6 +153,20 @@ public class heapPQ {
             }
         }
         return times;
+    }
+    private customer delMaxPriority() {
+        customer result = pq[0];
+ 
+        // Replace the value
+        // at the root with
+        // the last leaf
+        pq[0] = pq[size];
+        size = size - 1;
+        // Shift down the replaced
+        // element to maintain the
+        // heap property
+        sinkDown(0);
+        return result;
     }
     public couriers[] updateCouriers(couriers [] c, int time) {
         for (int i = 0; i<c.length;i++) {
