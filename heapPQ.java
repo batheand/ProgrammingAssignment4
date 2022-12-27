@@ -16,6 +16,17 @@ public class heapPQ {
         currSize++;
     }
     public void swimUp(int index) {
+        /* 
+        if (currSize==6) {
+            int temporary = pq[index/2].getPriorityLevel();
+            temporary = temporary;
+            pq[index/2].print();
+            pq[index/4].print();
+
+        }
+    
+        currSize = currSize;
+        */
         while (index > 1 && pq[index].getPriorityLevel()>pq[index/2].getPriorityLevel()) { 
             /*    
             customer temp = pq[index];
@@ -36,7 +47,9 @@ public class heapPQ {
             if (!less(index, j)) break;
             exch(index, j);
             index = j;
-}
+            
+        }
+        
     }
 
     public void simulateTest (customer [] customerList, int maxAvgWait) {
@@ -64,18 +77,28 @@ public class heapPQ {
                 }
                 while (i<customerList.length) {
                     //enlist the current time customers
-                    while (customerList[i].getOrderTime()==time) {
-                        enlist(customerList[i]);i++;
-                    } 
-                    i++;
+                    while (customerList[i].getOrderTime().equals(time)) {
+                        System.out.println("enlisted " + i);
+                        
+                        enlist(customerList[i]);
+                        
+                        i++;
+                    }
+                    //System.out.println(pq[3].getId());
+                    //i++;
+                    //time++;
                     times = blockAvailableCouriers(allCouriers, times, time,true);
+                    time++;
                 }
+                
             }
                 int totalTime = 0;
+                /* 
                 for (int j = 1; j<customerList.length; j++) {
                     System.out.println(times [j]);
                     totalTime += times[j];
                 }
+                */
                 avgTime = totalTime/customerList.length;
             } while (avgTime>maxAvgWait);
             simulate(customerList, courierCount);
@@ -118,7 +141,8 @@ public class heapPQ {
             if(allCouriers[i].isAvailable) {
                 customer temp = delMaxPriority();
                 times[temp.getId()] = time-temp.getOrderTime();
-                System.out.println(times[temp.getId()]);
+                System.out.println("ID"+ temp.getId() + " order time: " + temp.getOrderTime() + " time: " + time);
+                //System.out.println(times[temp.getId()]);
                 allCouriers[i].blockCourier(time, temp.getPreparationTime());
                 //delete the root and block the courier
                 //assign the root's time to times 
@@ -136,12 +160,13 @@ public class heapPQ {
         // Replace the value
         // at the root with
         // the last leaf
-        pq[1] = pq[size];
+        pq[1] = pq[currSize];
         size = size - 1;
         // Shift down the replaced
         // element to maintain the
         // heap property
         sinkDown(1);
+        --currSize;
         return result;
     }
     public couriers[] updateCouriers(couriers [] c, int time) {
