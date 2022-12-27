@@ -88,8 +88,8 @@ public class heapPQ {
                     allCouriers = updateCouriers(allCouriers, time);
                     time++;
                 }
-                times = blockAvailableCouriers(allCouriers, times, time,true);
                 allCouriers = updateCouriers(allCouriers, time);
+                times = blockAvailableCouriers(allCouriers, times, time,true);
                 time++;
             }
                 int totalTime = 0;
@@ -138,8 +138,8 @@ public class heapPQ {
                         break;
                     }
                 }
-                times = blockAvailableCouriers(allCouriers, times, time, false);
                 allCouriers = updateCouriers(allCouriers, time);
+                times = blockAvailableCouriers(allCouriers, times, time, false);
                 time++;
             }
 
