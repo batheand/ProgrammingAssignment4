@@ -41,9 +41,9 @@ public class heapPQ {
 
     }
     public void sinkDown(int index) {
-        while (2*index <= size){
+        while (2*index <= currSize){
             int j = 2*index;
-            if (j < size && less(j, j+1)) j++;
+            if (j < currSize && less(j, j+1)) j++;
             if (!less(index, j)) break;
             exch(index, j);
             index = j;
@@ -69,28 +69,28 @@ public class heapPQ {
         do { //until you find the correct courierCount
             //initialize the couriers
             courierCount++;
+            couriers [] allCouriers = new couriers [courierCount];
+            for (int j = 0; j<courierCount; j++) {
+                couriers temp = new couriers();
+                allCouriers [j] = temp; 
+            }
             while (pq[1]!=null) {
-                couriers [] allCouriers = new couriers [courierCount];
-                for (int j = 0; j<courierCount; j++) {
-                   couriers temp = new couriers();
-                    allCouriers [j] = temp; 
-                }
-                a:
                 while (i<customerList.length) {
                     //enlist the current time customers
                     while (customerList[i].getOrderTime()==time) {
                         System.out.println("enlisted"+i);
                         enlist(customerList[i]);i++;
-                        if (i==13) {
+                        if (i==customerList.length) {
                             break;
                         }
                     } 
                     times = blockAvailableCouriers(allCouriers, times, time,true);
                     allCouriers = updateCouriers(allCouriers, time);
                     time++;
-               
                 }
-                
+                times = blockAvailableCouriers(allCouriers, times, time,true);
+                allCouriers = updateCouriers(allCouriers, time);
+                time++;
             }
                 int totalTime = 0;
                 /* 
@@ -138,6 +138,9 @@ public class heapPQ {
                         break;
                     }
                 }
+                times = blockAvailableCouriers(allCouriers, times, time, false);
+                allCouriers = updateCouriers(allCouriers, time);
+                time++;
             }
 
             
@@ -147,7 +150,7 @@ public class heapPQ {
             if(allCouriers[i].isAvailable) {
                 customer temp = delMaxPriority();
                 times[temp.getId()] = time-temp.getOrderTime();
-                System.out.println("ID"+ temp.getId() + " order time: " + temp.getOrderTime() + " time: " + time);
+                System.out.println("ID: "+ temp.getId() + " order time: " + temp.getOrderTime() + " time: " + time);
                 //System.out.println(times[temp.getId()]);
                 allCouriers[i].blockCourier(time, temp.getPreparationTime());
                 //delete the root and block the courier
@@ -166,13 +169,13 @@ public class heapPQ {
         // Replace the value
         // at the root with
         // the last leaf
-        pq[1] = pq[currSize];
-        pq[currSize] = null;
+        exch(1, currSize--);
+        //pq[currSize+1] = new customer();
+        pq[currSize+1] = null;
         // Shift down the replaced
         // element to maintain the
         // heap property
         sinkDown(1);
-        --currSize;
         return result;
     }
     public couriers[] updateCouriers(couriers [] c, int time) {
@@ -192,9 +195,9 @@ public class heapPQ {
         return v.compareTo(w) < 0; 
     }
 
-    private static void exch( int i, int j){ 
-        int temp = i;
-        i = j;
-        j = temp;
+    private void exch( int i, int j){ 
+        customer temp = pq[i];
+        pq[i] = pq[j];
+        pq[j] = temp;
     }
 }
