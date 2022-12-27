@@ -77,18 +77,11 @@ public class heapPQ {
                 }
                 while (i<customerList.length) {
                     //enlist the current time customers
-                    while (customerList[i].getOrderTime().equals(time)) {
-                        System.out.println("enlisted " + i);
-                        
-                        enlist(customerList[i]);
-                        
-                        i++;
-                    }
-                    //System.out.println(pq[3].getId());
-                    //i++;
-                    //time++;
+                    while (customerList[i].getOrderTime()==time) {
+                        enlist(customerList[i]);i++;
+                    } 
+                    i++;
                     times = blockAvailableCouriers(allCouriers, times, time,true);
-                    time++;
                 }
                 
             }

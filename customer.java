@@ -7,7 +7,12 @@ public class customer {
         this.orderTime=orderTime;
         this.preparationTime=preparationTime;
     }
-    public customer () {
+    public customer() {
+        this.id=null;
+        this.priorityLevel=null;
+        this.orderTime=null;
+        this.preparationTime=null;
+
     }
     public void print () {
         System.out.println("ID: " + id);
