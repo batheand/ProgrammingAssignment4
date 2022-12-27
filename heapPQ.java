@@ -16,8 +16,8 @@ public class heapPQ {
         currSize++;
     }
     public void swimUp(int index) {
-        /* 
-        if (currSize==6) {
+        
+        if (currSize==12) {
             int temporary = pq[index/2].getPriorityLevel();
             temporary = temporary;
             pq[index/2].print();
@@ -26,7 +26,7 @@ public class heapPQ {
         }
     
         currSize = currSize;
-        */
+        
         while (index > 1 && pq[index].getPriorityLevel()>pq[index/2].getPriorityLevel()) { 
             /*    
             customer temp = pq[index];
@@ -75,13 +75,20 @@ public class heapPQ {
                    couriers temp = new couriers();
                     allCouriers [j] = temp; 
                 }
+                a:
                 while (i<customerList.length) {
                     //enlist the current time customers
                     while (customerList[i].getOrderTime()==time) {
+                        System.out.println("enlisted"+i);
                         enlist(customerList[i]);i++;
+                        if (i==13) {
+                            break;
+                        }
                     } 
-                    i++;
                     times = blockAvailableCouriers(allCouriers, times, time,true);
+                    allCouriers = updateCouriers(allCouriers, time);
+                    time++;
+               
                 }
                 
             }
@@ -120,10 +127,16 @@ public class heapPQ {
                     //enlist the current time customers
                     while (customerList[i].getOrderTime()==time) {
                         enlist(customerList[i]); i++;
+                        if (i==13) {
+                            break;
+                        }
                     }
-                    i++;
                     times = blockAvailableCouriers(allCouriers, times, time, false);
                     allCouriers = updateCouriers(allCouriers, time);
+                    time++;
+                    if (i==13) {
+                        break;
+                    }
                 }
             }
 
@@ -154,7 +167,7 @@ public class heapPQ {
         // at the root with
         // the last leaf
         pq[1] = pq[currSize];
-        size = size - 1;
+        pq[currSize] = null;
         // Shift down the replaced
         // element to maintain the
         // heap property
