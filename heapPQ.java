@@ -68,7 +68,7 @@ public class heapPQ {
                         enlist(customerList[i]);i++;
                     } 
                     i++;
-                    times = blockAvailableCouriers(allCouriers, times, time,true);
+                    times = blockAvailableCouriers(allCouriers, times, time,true);           
                 }
             }
                 int totalTime = 0;
