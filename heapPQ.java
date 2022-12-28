@@ -93,12 +93,12 @@ public class heapPQ {
                 time++;
             }
                 int totalTime = 0;
-                /* 
+                
                 for (int j = 1; j<customerList.length; j++) {
-                    System.out.println(times [j]);
+                    //System.out.println(times [j]);
                     totalTime += times[j];
                 }
-                */
+                
                 avgTime = totalTime/customerList.length;
             } while (avgTime>maxAvgWait);
             simulate(customerList, courierCount);
