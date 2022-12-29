@@ -1,7 +1,7 @@
 import java.io.*;
 
 public class heapPQ {
-    int size, currSize = 1;
+    int size, currSize = 0;
     int count=0;
     customer [] pq;
     public heapPQ (int s) {
@@ -12,9 +12,9 @@ public class heapPQ {
     }
     
     public void enlist (customer toBeEnlisted) {
+        currSize++;
         pq [currSize] = toBeEnlisted;
         swimUp(currSize);
-        currSize++;
     }
     public void swimUp(int index) {
  /*       
@@ -38,6 +38,8 @@ public class heapPQ {
             exch(index, index/2);
             index = index/2;
         }
+        currSize= currSize;
+        pq = pq;
 
 
     }
@@ -188,8 +190,9 @@ public class heapPQ {
         // Replace the value
         // at the root with
         // the last leaf
-        exch(1, currSize--);
-        pq[currSize+1] = new customer();
+        exch(1, currSize);
+        pq[currSize] = new customer();
+        currSize--;
         //pq[currSize+1] = null;
         // Shift down the replaced
         // element to maintain the
