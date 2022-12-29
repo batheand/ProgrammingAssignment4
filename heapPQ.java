@@ -74,7 +74,8 @@ public class heapPQ {
                 couriers temp = new couriers();
                 allCouriers [j] = temp; 
             }
-            while (pq[1].getId()!=0) {
+
+            while (pq[1]!= null) {
                 while (i<customerList.length) {
                     //enlist the current time customers
                     while (customerList[i].getOrderTime()==time) {
@@ -88,10 +89,11 @@ public class heapPQ {
                     allCouriers = updateCouriers(allCouriers, time);
                     time++;
                 }
+
                 allCouriers = updateCouriers(allCouriers, time);
                 times = blockAvailableCouriers(allCouriers, times, time,true);
                 time++;
-            }
+            } 
                 int totalTime = 0;
                 
                 for (int j = 1; j<customerList.length; j++) {
@@ -102,6 +104,7 @@ public class heapPQ {
                 avgTime = totalTime/customerList.length;
             } while (avgTime>maxAvgWait);
             simulate(customerList, courierCount);
+            System.out.println(avgTime);
     }
     public void simulate (customer [] customerList, int courierCount) {
         //enlist the current time customers, use the current number of couriers
