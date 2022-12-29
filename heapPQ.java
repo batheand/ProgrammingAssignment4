@@ -28,7 +28,7 @@ public class heapPQ {
     
         currSize = currSize;
 */        
-        while (index > 1 && pq[index].getPriorityLevel()>pq[index/2].getPriorityLevel()) { 
+        while (index > 1 && less(index/2,index)) { 
             /*    
             customer temp = pq[index];
             pq[index] = pq[index/2];
