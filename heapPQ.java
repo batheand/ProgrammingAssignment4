@@ -74,7 +74,7 @@ public class heapPQ {
                 couriers temp = new couriers();
                 allCouriers [j] = temp; 
             }
-            while (pq[1]!=null) {
+            while (pq[1].getId()!=0) {
                 while (i<customerList.length) {
                     //enlist the current time customers
                     while (customerList[i].getOrderTime()==time) {
@@ -171,7 +171,7 @@ public class heapPQ {
         // the last leaf
         exch(1, currSize--);
         //pq[currSize+1] = new customer();
-        pq[currSize+1] = null;
+        //pq[currSize+1] = null;
         // Shift down the replaced
         // element to maintain the
         // heap property
@@ -191,8 +191,9 @@ public class heapPQ {
         }
     }
     
-    private static boolean less(Comparable v, Comparable w){ 
-        return v.compareTo(w) < 0; 
+    private boolean less(int i, int j) {
+        if (pq[i].getPriorityLevel()<pq[j].getPriorityLevel()) return true;
+        else return false;
     }
 
     private void exch( int i, int j){ 
