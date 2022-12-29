@@ -2,6 +2,7 @@ import java.io.*;
 
 public class heapPQ {
     int size, currSize = 1;
+    int count=0;
     customer [] pq;
     public heapPQ (int s) {
         pq = new customer [s];
@@ -16,7 +17,7 @@ public class heapPQ {
         currSize++;
     }
     public void swimUp(int index) {
-        
+ /*       
         if (currSize==12) {
             int temporary = pq[index/2].getPriorityLevel();
             temporary = temporary;
@@ -26,7 +27,7 @@ public class heapPQ {
         }
     
         currSize = currSize;
-        
+*/        
         while (index > 1 && pq[index].getPriorityLevel()>pq[index/2].getPriorityLevel()) { 
             /*    
             customer temp = pq[index];
@@ -93,6 +94,10 @@ public class heapPQ {
                 allCouriers = updateCouriers(allCouriers, time);
                 times = blockAvailableCouriers(allCouriers, times, time,true);
                 time++;
+                if (count == 12) {
+                    break;
+                }
+
             } 
                 int totalTime = 0;
                 
@@ -154,6 +159,7 @@ public class heapPQ {
                 customer temp = delMaxPriority();
                 times[temp.getId()] = time-temp.getOrderTime();
                 System.out.println("ID: "+ temp.getId() + " order time: " + temp.getOrderTime() + " time: " + time);
+                count++;
                 //System.out.println(times[temp.getId()]);
                 allCouriers[i].blockCourier(time, temp.getPreparationTime());
                 //delete the root and block the courier
@@ -180,6 +186,10 @@ public class heapPQ {
         // heap property
         sinkDown(1);
         return result;
+    }
+    private customer returnMaxPriority() {
+        return pq[1];
+        
     }
     public couriers[] updateCouriers(couriers [] c, int time) {
         for (int i = 0; i<c.length;i++) {
