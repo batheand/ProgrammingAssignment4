@@ -61,26 +61,29 @@ public class heapPQ {
         //store the serving times, take avg compare to maxAvgWait
         //if bigger increment the courier count and try again
         //if less or equal print the needed courier count and the simulation
-        int time = 1;
-        double avgTime=0;
-        int[] times = new int [customerList.length];
-        int i=1;
+        
+        
+        double avgTime;
         int courierCount = 0;
 
         do { //until you find the correct courierCount
             //initialize the couriers
             courierCount++;
             couriers [] allCouriers = new couriers [courierCount];
+            int i=1;
+            int time = 1;
+            avgTime=0;
+            System.out.println("\n\n ATTEMPTING WITH " + courierCount + " COURIERS");
             for (int j = 0; j<courierCount; j++) {
                 couriers temp = new couriers();
                 allCouriers [j] = temp; 
             }
-
-            while (pq[1]!= null) {
+            int[] times = new int [customerList.length];
+            do {
                 while (i<customerList.length) {
                     //enlist the current time customers
                     while (customerList[i].getOrderTime()==time) {
-                        System.out.println("enlisted"+i);
+                        System.out.println("enlisted"+customerList[i].getId());
                         enlist(customerList[i]);i++;
                         if (i==customerList.length) {
                             break;
@@ -92,13 +95,15 @@ public class heapPQ {
                 }
 
                 allCouriers = updateCouriers(allCouriers, time);
-                times = blockAvailableCouriers(allCouriers, times, time,true);
+                if(!pq[1].getId().equals(0)) {
+                    times = blockAvailableCouriers(allCouriers, times, time, true);
+                }  
                 time++;
                 if (count == 12) {
                     break;
                 }
 
-            } 
+            } while ((!pq[1].getId().equals(0)));
                 int totalTime = 0;
                 
                 for (int j = 1; j<customerList.length; j++) {
@@ -106,7 +111,7 @@ public class heapPQ {
                     totalTime += times[j];
                 }
                 
-                avgTime = totalTime/customerList.length;
+                avgTime = totalTime/(customerList.length-1);
             } while (avgTime>maxAvgWait);
             simulate(customerList, courierCount);
             System.out.println(avgTime);
@@ -124,7 +129,7 @@ public class heapPQ {
         int[] times = new int [customerList.length];
         int i=1;
 
-            while (pq[1]!=null) {
+            do {
                             //initialize the couriers
                 couriers [] allCouriers = new couriers [courierCount];
                 for (int j = 0; j<courierCount; j++) {
@@ -147,9 +152,11 @@ public class heapPQ {
                     }
                 }
                 allCouriers = updateCouriers(allCouriers, time);
-                times = blockAvailableCouriers(allCouriers, times, time, false);
+                if(!pq[1].getId().equals(0)) {
+                    times = blockAvailableCouriers(allCouriers, times, time, false);
+                }      
                 time++;
-            }
+            } while (!pq[1].getId().equals(0));
 
             
     }
@@ -157,6 +164,9 @@ public class heapPQ {
         for (int i = 0; i<allCouriers.length; i++){
             if(allCouriers[i].isAvailable) {
                 customer temp = delMaxPriority();
+                if(!temp.getId().equals(0)){
+                    
+                }
                 times[temp.getId()] = time-temp.getOrderTime();
                 System.out.println("ID: "+ temp.getId() + " order time: " + temp.getOrderTime() + " time: " + time);
                 count++;
@@ -179,7 +189,7 @@ public class heapPQ {
         // at the root with
         // the last leaf
         exch(1, currSize--);
-        //pq[currSize+1] = new customer();
+        pq[currSize+1] = new customer();
         //pq[currSize+1] = null;
         // Shift down the replaced
         // element to maintain the
