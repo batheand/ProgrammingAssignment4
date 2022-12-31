@@ -15,6 +15,7 @@ public class heapPQ {
         currSize++;
         pq [currSize] = toBeEnlisted;
         swimUp(currSize);
+        pq=pq;
     }
     public void swimUp(int index) {
  /*       
@@ -198,6 +199,7 @@ public class heapPQ {
         // element to maintain the
         // heap property
         sinkDown(1);
+        pq=pq;
         return result;
     }
     private customer returnMaxPriority() {
@@ -218,8 +220,14 @@ public class heapPQ {
     }
     
     private boolean less(int i, int j) {
-        if (pq[i].getPriorityLevel()<pq[j].getPriorityLevel()) return true;
-        else return false;
+        if (pq[i].getPriorityLevel()<pq[j].getPriorityLevel()){
+            return true;
+        } else if (pq[i].getPriorityLevel().equals(pq[j].getPriorityLevel())&&pq[i].getOrderTime()>pq[j].getOrderTime()) {
+            return true;
+        }
+        else{
+            return false;
+        } 
     }
 
     private void exch( int i, int j){ 
