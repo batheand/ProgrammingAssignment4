@@ -92,8 +92,8 @@ public class heapPQ {
                             break;
                         }
                     } 
-                    times = blockAvailableCouriers(allCouriers, times, time,true);
                     allCouriers = updateCouriers(allCouriers, time);
+                    times = blockAvailableCouriers(allCouriers, times, time,true);
                     time++;
                 }
 
@@ -107,7 +107,7 @@ public class heapPQ {
                 }
 
             } while ((!pq[1].getId().equals(0)));
-                int totalTime = 0;
+                double totalTime = 0;
                 
                 for (int j = 1; j<customerList.length; j++) {
                     //System.out.println(times [j]);
