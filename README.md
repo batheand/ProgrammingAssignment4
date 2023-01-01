@@ -2,17 +2,22 @@
   In this task, you are supposed to implement a Java program for the scheduling problem of a famous online order delivery company by using heap-based priority queue. The manager is trying to find how many couriers work in the order delivery part. For each courier in the order delivery, the expense of the company increases; but according to the standards of this company, the average waiting time for all customers should not exceed a given amount of time. So, the manager needs to optimize this number and calls for your help in this task. This company has the data of predict delivery time of customers. Your program should use these data to calculate average waiting times and find the minimum number of couriers needs to meet the average waiting time requirement.
 
   • The customer with the highest priority should be examined first.
+  
   • In case of having two customers with the same highest priority, the customer who has
   waited longer should be selected first.
+  
   • If more than one couriers is available at a given time; the customer is assigned to the
   courier with a lower id.
+  
   • When a courier starts giving a service to a customer, the courier should finish his service
   with this customer even though another customer with a higher priority gives order to
   company.
+  
   • Once a customer is assigned to a courier, the courier immediately starts delivering order
   of that customer and is not available during the service time given for that
   customer. After the service of that customer carries out, the courier becomes available
   immediately.
+  
   • The waiting time of a customer is the duration (difference) between the given order time
   of the customer and the time he is assigned to a courier.
 
