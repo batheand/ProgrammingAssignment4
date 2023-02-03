@@ -1,4 +1,4 @@
-# ProgrammingAssignment4
+# CourierScheduler
   In this task, you are supposed to implement a Java program for the scheduling problem of a famous online order delivery company by using heap-based priority queue. The manager is trying to find how many couriers work in the order delivery part. For each courier in the order delivery, the expense of the company increases; but according to the standards of this company, the average waiting time for all customers should not exceed a given amount of time. So, the manager needs to optimize this number and calls for your help in this task. This company has the data of predict delivery time of customers. Your program should use these data to calculate average waiting times and find the minimum number of couriers needs to meet the average waiting time requirement.
 
   • The customer with the highest priority should be examined first.
